@@ -1,0 +1,8 @@
+torch>=2.0.0
+torchvision>=0.15
+pandas
+pyarrow
+gcsfs
+optuna
+Pillow
+numpy<2.0.0
