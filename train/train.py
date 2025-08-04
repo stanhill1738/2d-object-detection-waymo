@@ -33,7 +33,7 @@ def train_one_epoch(model, dataloader, optimizer, device):
 
 def validate(model, dataloader, device):
     model.eval()
-    metric = MeanAveragePrecision(iou_threshold=0.5)
+    metric = MeanAveragePrecision(iou_thresholds=[0.5])
     with torch.no_grad():
         for images, targets in dataloader:
             images = [img.to(device) for img in images]

@@ -7,3 +7,4 @@ optuna
 Pillow
 numpy<2.0.0
 torchmetrics
+torchmetrics[detection]

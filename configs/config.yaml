@@ -4,11 +4,11 @@ data:
   label_map: label_map.py
 
 training:
-  num_epochs: 3
+  num_epochs: 5
   checkpoint_dir: /tmp/waymo_data/checkpoints/
   save_interval: 1
-  num_train_files: 600
-  num_val_files: 200
+  num_train_files: 6000
+  num_val_files: 2000
 
 optuna:
   n_trials: 10
