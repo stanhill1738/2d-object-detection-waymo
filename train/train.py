@@ -27,7 +27,7 @@ def train_one_epoch(model, dataloader, optimizer, device):
         total_loss += losses.item()
 
         now = datetime.now()
-        print(f"Time: {now.strftime("%H:%M:%S")} - [Train] Batch {batch_idx + 1}/{len(dataloader)} - Loss: {losses.item():.4f}")
+        print(f"Time: {now.strftime('%H:%M:%S')} - [Train] Batch {batch_idx + 1}/{len(dataloader)} - Loss: {losses.item():.4f}")
 
     return total_loss / len(dataloader)
 
