@@ -13,7 +13,7 @@ def list_local_files(directory):
 def train_one_epoch(model, dataloader, optimizer, device):
     model.train()
     total_loss = 0
-    for images, targets in dataloader:
+    for batch_idx, (images, targets) in enumerate(dataloader):
         images = [img.to(device) for img in images]
         targets = [{k: v.to(device) for k, v in t.items()} for t in targets]
 
@@ -25,7 +25,10 @@ def train_one_epoch(model, dataloader, optimizer, device):
         optimizer.step()
         total_loss += losses.item()
 
+        print(f"[Train] Batch {batch_idx + 1}/{len(dataloader)} - Loss: {losses.item():.4f}")
+
     return total_loss / len(dataloader)
+
 
 def validate(model, dataloader, device):
     model.eval()
