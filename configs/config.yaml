@@ -7,8 +7,8 @@ training:
   num_epochs: 3
   checkpoint_dir: /tmp/waymo_data/checkpoints/
   save_interval: 1
-  num_train_files: 6000
-  num_val_files: 2000
+  num_train_files: 600
+  num_val_files: 200
 
 optuna:
   n_trials: 10

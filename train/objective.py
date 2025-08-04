@@ -15,4 +15,4 @@ def objective(trial, base_config):
         "num_val_files": base_config["training"]["num_val_files"]
     }
 
-    return run_training(config)
+    return -run_training(config)
