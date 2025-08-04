@@ -1,12 +1,12 @@
 data:
-  train_prefix: /mnt/waymo_data/waymo_processed_samples/training
-  val_prefix: /mnt/waymo_data/waymo_processed_samples/validation
+  train_prefix: /tmp/waymo_data/waymo_processed_samples/training
+  val_prefix: /tmp/waymo_data/waymo_processed_samples/validation
   label_map: label_map.py
 
 training:
   batch_size: 8
   num_epochs: 5
-  checkpoint_dir: /mnt/waymo_data/checkpoints/
+  checkpoint_dir: /tmp/waymo_data/checkpoints/
   save_interval: 1
 
 optuna:
