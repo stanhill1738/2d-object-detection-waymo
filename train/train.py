@@ -39,11 +39,20 @@ def validate(model, dataloader, device):
         for images, targets in dataloader:
             images = [img.to(device) for img in images]
             targets = [{k: v.to(device) for k, v in t.items()} for t in targets]
-            loss_dict = model(images, targets)
-            losses = sum(loss for loss in loss_dict.values())
+
+            loss_output = model(images, targets)
+
+            if isinstance(loss_output, dict):
+                losses = sum(loss for loss in loss_output.values())
+            elif isinstance(loss_output, list):
+                losses = sum(loss_output)
+            else:  # assume it's a single tensor
+                losses = loss_output
+
             total_loss += losses.item()
 
     return total_loss / len(dataloader)
+
 
 def run_training(config):
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
