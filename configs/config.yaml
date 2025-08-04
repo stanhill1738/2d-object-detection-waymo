@@ -1,0 +1,14 @@
+data:
+  train_prefix: gs://waymo_camera_data_01082025/waymo_processed_samples/training
+  val_prefix: gs://waymo_camera_data_01082025/waymo_processed_samples/validation
+  label_map: label_map.py
+
+training:
+  batch_size: 8
+  num_epochs: 15
+  checkpoint_dir: gs://waymo_camera_data_01082025/checkpoints/
+  save_interval: 1
+
+optuna:
+  n_trials: 25
+  timeout: 3600

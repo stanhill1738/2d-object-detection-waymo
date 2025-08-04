@@ -5,7 +5,7 @@ import gcsfs
 class WaymoDataset(Dataset):
     def __init__(self, gcs_prefix, file_list, transform=None, label_map=None):
         self.fs = gcsfs.GCSFileSystem(token='google_default')
-        self.gcs_prefix = gcs_prefix
+        self.gcs_prefix = gcs_prefix.rstrip('/')  # remove trailing slash if present
         self.file_list = file_list
         self.transform = transform
         self.label_map = label_map
@@ -14,7 +14,10 @@ class WaymoDataset(Dataset):
         return len(self.file_list)
 
     def __getitem__(self, idx):
-        file_path = f"{self.gcs_prefix}/{self.file_list[idx]}"
+        file_name = self.file_list[idx]
+        file_path = f"{self.gcs_prefix}/{file_name}"
+        print(f"Opening file: {file_path}")
+
         with self.fs.open(file_path, 'rb') as f:
             sample = torch.load(f)
 

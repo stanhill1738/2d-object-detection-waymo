@@ -5,6 +5,8 @@ from utils.gcs_utils import save_checkpoint, list_gcs_files
 from models.model import get_model
 import torchvision.transforms as T
 import time
+from utils.label_map_utils import load_label_map
+import json
 
 def train_one_epoch(model, dataloader, optimizer, device):
     model.train()
@@ -38,8 +40,7 @@ def validate(model, dataloader, device):
 
 def run_training(config):
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-
-    model = get_model(num_classes=11)  # Waymo has 10 classes + background
+    model = get_model(num_classes=4)  # Assuming 3 foreground classes + background
     model.to(device)
 
     optimizer = torch.optim.SGD(
@@ -49,12 +50,17 @@ def run_training(config):
         weight_decay=config["weight_decay"]
     )
 
-    # Load data
-    train_files = list_gcs_files(config["train_prefix"])
-    val_files = list_gcs_files(config["val_prefix"])
+    # Load file list from subset JSON
+    with open(config["train_subset_json"]) as f:
+        train_files = json.load(f)
+    with open(config["val_subset_json"]) as f:
+        val_files = json.load(f)
 
-    train_dataset = WaymoDataset(config["train_prefix"], train_files)
-    val_dataset = WaymoDataset(config["val_prefix"], val_files)
+    # Load label map
+    label_map = load_label_map(config["label_map_path"])
+
+    train_dataset = WaymoDataset(config["train_prefix"], train_files, label_map=label_map)
+    val_dataset = WaymoDataset(config["val_prefix"], val_files, label_map=label_map)
 
     train_loader = DataLoader(train_dataset, batch_size=config["batch_size"], shuffle=True, collate_fn=lambda x: tuple(zip(*x)))
     val_loader = DataLoader(val_dataset, batch_size=config["batch_size"], collate_fn=lambda x: tuple(zip(*x)))
