@@ -43,15 +43,28 @@ def validate(model, dataloader, device):
             loss_output = model(images, targets)
 
             if isinstance(loss_output, dict):
+                # Typical for Faster R-CNN
                 losses = sum(loss for loss in loss_output.values())
+
             elif isinstance(loss_output, list):
-                losses = sum(loss_output)
-            else:  # assume it's a single tensor
+                # List of dicts: sum all values in all dicts
+                if all(isinstance(item, dict) for item in loss_output):
+                    losses = sum(
+                        sum(loss for loss in loss_dict.values())
+                        for loss_dict in loss_output
+                    )
+                else:
+                    # List of loss tensors
+                    losses = sum(loss_output)
+
+            else:
+                # Single tensor
                 losses = loss_output
 
             total_loss += losses.item()
 
     return total_loss / len(dataloader)
+
 
 
 def run_training(config):
