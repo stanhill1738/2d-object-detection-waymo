@@ -45,7 +45,7 @@ def validate(model, dataloader, device):
 
 def run_training(config):
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-    model = get_model(num_classes=4)  # Assuming 3 classes + background
+    model = get_model(num_classes=4)  
     model.to(device)
 
     optimizer = torch.optim.SGD(
@@ -58,6 +58,12 @@ def run_training(config):
     # List local .pt files
     train_files = list_local_files(config["train_prefix"])
     val_files = list_local_files(config["val_prefix"])
+
+    # ⏱ Limit file count for faster training runs
+    num_train_files = config["num_train_files"]
+    num_val_files = config["num_val_files"]
+    train_files = train_files[:num_train_files]
+    val_files = val_files[:num_val_files]
 
     # Load label map
     label_map = load_label_map(config["label_map_path"])

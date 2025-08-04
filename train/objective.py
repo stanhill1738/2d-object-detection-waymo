@@ -10,7 +10,9 @@ def objective(trial, base_config):
         "train_prefix": base_config["data"]["train_prefix"],
         "val_prefix": base_config["data"]["val_prefix"],
         "checkpoint_path": base_config["training"]["checkpoint_dir"] + "/best_model.pt",
-        "label_map_path": base_config["data"]["label_map"]
+        "label_map_path": base_config["data"]["label_map"],
+        "num_train_files": base_config["training"]["num_train_files"],
+        "num_val_files": base_config["training"]["num_val_files"]
     }
 
     return run_training(config)
