@@ -16,7 +16,6 @@ class WaymoDataset(Dataset):
     def __getitem__(self, idx):
         file_name = self.file_list[idx]
         file_path = f"{self.gcs_prefix}/{file_name}"
-        print(f"Opening file: {file_path}")
 
         with self.fs.open(file_path, 'rb') as f:
             sample = torch.load(f)
