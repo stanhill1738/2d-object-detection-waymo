@@ -5,6 +5,7 @@ from utils.gcs_utils import save_checkpoint
 from models.model import get_model
 from utils.label_map_utils import load_label_map
 import os
+from datetime import datetime
 
 def list_local_files(directory):
     """List all .pt files in a local directory."""
@@ -25,7 +26,8 @@ def train_one_epoch(model, dataloader, optimizer, device):
         optimizer.step()
         total_loss += losses.item()
 
-        print(f"[Train] Batch {batch_idx + 1}/{len(dataloader)} - Loss: {losses.item():.4f}")
+        now = datetime.now()
+        print(f"Time: {now.strftime("%H:%M:%S")} - [Train] Batch {batch_idx + 1}/{len(dataloader)} - Loss: {losses.item():.4f}")
 
     return total_loss / len(dataloader)
 
