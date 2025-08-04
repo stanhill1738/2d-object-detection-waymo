@@ -1,12 +1,14 @@
 import torch
 from torch.utils.data import DataLoader
 from data.waymo_dataset import WaymoDataset
-from utils.gcs_utils import save_checkpoint, list_local_files
+from utils.gcs_utils import save_checkpoint
 from models.model import get_model
-import torchvision.transforms as T
-import time
 from utils.label_map_utils import load_label_map
-import json
+import os
+
+def list_local_files(directory):
+    """List all .pt files in a local directory."""
+    return sorted([f for f in os.listdir(directory) if f.endswith('.pt')])
 
 def train_one_epoch(model, dataloader, optimizer, device):
     model.train()
@@ -40,7 +42,7 @@ def validate(model, dataloader, device):
 
 def run_training(config):
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-    model = get_model(num_classes=4)  # Assuming 3 foreground classes + background
+    model = get_model(num_classes=4)  # Assuming 3 classes + background
     model.to(device)
 
     optimizer = torch.optim.SGD(
@@ -50,18 +52,18 @@ def run_training(config):
         weight_decay=config["weight_decay"]
     )
 
-    # Load file list from subset JSON
-    with open(config["train_subset_json"]) as f:
-        train_files = json.load(f)
-    with open(config["val_subset_json"]) as f:
-        val_files = json.load(f)
+    # List local .pt files
+    train_files = list_local_files(config["train_prefix"])
+    val_files = list_local_files(config["val_prefix"])
 
     # Load label map
     label_map = load_label_map(config["label_map_path"])
 
+    # Load datasets
     train_dataset = WaymoDataset(config["train_prefix"], train_files, label_map=label_map)
     val_dataset = WaymoDataset(config["val_prefix"], val_files, label_map=label_map)
 
+    # Loaders
     train_loader = DataLoader(
         train_dataset,
         batch_size=config["batch_size"],
@@ -83,7 +85,7 @@ def run_training(config):
     best_val_loss = float("inf")
 
     for epoch in range(config["epochs"]):
-        print(f"Starting Epoch: {epoch}")
+        print(f"Starting Epoch: {epoch + 1}/{config['epochs']}")
         train_loss = train_one_epoch(model, train_loader, optimizer, device)
         val_loss = validate(model, val_loader, device)
 
@@ -91,6 +93,6 @@ def run_training(config):
             best_val_loss = val_loss
             save_checkpoint(model, optimizer, epoch, config["checkpoint_path"])
 
-        print(f"Epoch {epoch}: Train Loss = {train_loss:.4f}, Val Loss = {val_loss:.4f}")
+        print(f"Epoch {epoch + 1}: Train Loss = {train_loss:.4f}, Val Loss = {val_loss:.4f}")
 
     return best_val_loss

@@ -10,9 +10,7 @@ def objective(trial, base_config):
         "train_prefix": base_config["data"]["train_prefix"],
         "val_prefix": base_config["data"]["val_prefix"],
         "checkpoint_path": base_config["training"]["checkpoint_dir"] + "/best_model.pt",
-        "label_map_path": base_config["data"]["label_map"],
-        "train_subset_json": "data/training_subset_20k.json",
-        "val_subset_json": "data/validation_subset_7k.json"
+        "label_map_path": base_config["data"]["label_map"]
     }
 
     return run_training(config)
