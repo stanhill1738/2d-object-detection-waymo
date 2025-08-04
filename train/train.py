@@ -62,12 +62,28 @@ def run_training(config):
     train_dataset = WaymoDataset(config["train_prefix"], train_files, label_map=label_map)
     val_dataset = WaymoDataset(config["val_prefix"], val_files, label_map=label_map)
 
-    train_loader = DataLoader(train_dataset, batch_size=config["batch_size"], shuffle=True, collate_fn=lambda x: tuple(zip(*x)))
-    val_loader = DataLoader(val_dataset, batch_size=config["batch_size"], collate_fn=lambda x: tuple(zip(*x)))
+    train_loader = DataLoader(
+        train_dataset,
+        batch_size=config["batch_size"],
+        shuffle=True,
+        collate_fn=lambda x: tuple(zip(*x)),
+        num_workers=8,
+        pin_memory=True
+    )
+
+    val_loader = DataLoader(
+        val_dataset,
+        batch_size=config["batch_size"],
+        shuffle=False,
+        collate_fn=lambda x: tuple(zip(*x)),
+        num_workers=4,
+        pin_memory=True
+    )
 
     best_val_loss = float("inf")
 
     for epoch in range(config["epochs"]):
+        print(f"Starting Epoch: {epoch}")
         train_loss = train_one_epoch(model, train_loader, optimizer, device)
         val_loss = validate(model, val_loader, device)
 
