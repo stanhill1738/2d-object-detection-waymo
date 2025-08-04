@@ -1,7 +1,7 @@
 import torch
 from torch.utils.data import DataLoader
 from data.waymo_dataset import WaymoDataset
-from utils.gcs_utils import save_checkpoint, list_gcs_files
+from utils.gcs_utils import save_checkpoint, list_local_files
 from models.model import get_model
 import torchvision.transforms as T
 import time
