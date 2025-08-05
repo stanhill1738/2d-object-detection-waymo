@@ -1,7 +1,7 @@
 import yaml
 from train.train_final import run_training, test_model
 
-with open("final_config.yaml") as f:
+with open("./configs/final_config.yaml") as f:
     base = yaml.safe_load(f)
 
 config = {
