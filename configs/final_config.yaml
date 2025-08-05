@@ -12,8 +12,8 @@ training:
   early_stopping_patience: 5
 
 files:
-  num_train_files: 24000
-  num_val_files: 4000
+  num_train_files: 17996
+  num_val_files: 5000
   num_test_files: 4000
 
 optimizer:
