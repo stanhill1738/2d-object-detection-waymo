@@ -93,7 +93,7 @@ Beyond 2D object detection and tracking, the Waymo Open Dataset can be used for:
 
 These capabilities make the dataset valuable for both academic research and industrial-scale autonomous driving development.
 
-### Is there anything about the composition of the dataset or the way it was collected and preprocessed/cleaned/labeled that might impact future uses? For example, is there anything that a dataset consumer might need to know to avoid uses that could result in unfair treatment of individuals or groups (e.g., stereotyping, quality of service issues) or other risks or harms (e.g., legal risks, financial harms)? If so, please provide a description. Is there anything a dataset consumer could do to mitigate these risks or harms? 
+### Is there anything about the composition of the dataset or the way it was collected and preprocessed/cleaned/labeled that might impact future uses?
 
 #### Dataset Composition and Collection Risks
 
@@ -134,8 +134,6 @@ These capabilities make the dataset valuable for both academic research and indu
 - **Transparency in Deployment**: Clearly document training datasets, limitations, and known biases when deploying perception models into safety-critical applications.
 
 ### Are there tasks for which the dataset should not be used? If so, please provide a description.
-
-### Tasks for Which the Dataset Should Not Be Used
 
 While the Waymo Open Dataset is highly valuable for autonomous vehicle perception tasks, there are certain applications for which it is not suitable or may pose ethical, legal, or technical risks:
 
@@ -180,7 +178,7 @@ The Waymo Open Dataset has been publicly distributed by Waymo LLC since December
   - The dataset has been used in **academic research, benchmarks, and public challenges** (e.g., the Waymo Open Dataset Challenges at CVPR and NeurIPS).
   - Citations and references to the dataset appear in hundreds of peer-reviewed papers.
 
-### Is it subject to any copyright or other intellectual property (IP) license, and/or under applicable terms of use (ToU)?
+### Is it subject to any copyright or other intellectual property (IP) license, and/or under applicable terms of use (ToU)?
 
 The Waymo Open Dataset is protected under **copyright** and is distributed under a **custom research-only license** governed by Waymo LLC.
 
