@@ -6,4 +6,4 @@
     `python3 -m venv venv`
     `source venv/bin/activate`
 2. `pip install -r requirements.txt`
-3. 
+3. `python main.py` (or use `nohup` to run in the background)

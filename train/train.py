@@ -88,4 +88,4 @@ def run_training(config):
 
         print(f"Epoch {epoch + 1}: Train Loss = {train_loss:.4f}, Val mAP@0.5 = {val_map:.4f}")
 
-    return -best_map  # For Optuna to minimize
+    return best_map
