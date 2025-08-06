@@ -11,7 +11,7 @@ import numpy as np
 
 # ---------- Config ----------
 DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-MODEL_PATH = "../model_pt/best_model.pt"  # Path to trained model
+MODEL_PATH = "../model_pt/best_model.pt"  # Path to trained model (too big for repo)
 INPUT_DIR = "/tmp/video"  # Download videos to here, making sure they are from same camera.
 OUTPUT_DIR = "video_frames"
 VIDEO_NAME = "predictions.mp4"
