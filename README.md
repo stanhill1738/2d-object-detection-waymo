@@ -1,7 +1,5 @@
 # 2D Object Detection using the Waymo Open Perception Dataset
 
-
-## NON-TECHNICAL EXPLANATION OF YOUR PROJECT
 This project focuses on building a machine learning model that can detect and classify objects (vehicles, pedestrians, and cyclists) in camera images from self-driving cars. It uses real-world driving footage from the Waymo Open Dataset to train a computer to draw boxes around these objects and identify what they are. The goal is to help improve the perception systems used in autonomous driving technology.
 
 ## DATA
@@ -34,11 +32,9 @@ To improve these scores, a few things could be done:
 1. Train on a much larger dataset - only a subset was used
 2. Run more hyperparameter tests to have greater confidence in the hyperparameters chosen for the final training
 3. Create class-balanced datasets, which may impact the accuracy of some classes, but improve the accuracy of under-represented classes
+
+![Screenshot](images/per_class_ap.png)
  
 ### On Accuracy and Safety
 
 Accuracy metrics like mAP and mAR are critical for evaluating perception models in autonomous vehicles, as they directly reflect the system's ability to reliably detect and localize objects in the environment. High accuracy across **all classes** is essential: a model that performs well on vehicles but poorly on pedestrians or cyclists may lead to unsafe decisions in complex driving scenarios. Ensuring balanced and robust detection performance helps reduce the risk of false negatives or misclassifications, which are especially dangerous when vulnerable road users are involved. In safety-critical applications like autonomous driving, even small improvements in detection accuracy can have a significant impact on real-world safety outcomes.
-
-
-You can include images of plots using the code below:
-![Screenshot](images/per_class_ap.png)
