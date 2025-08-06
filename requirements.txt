@@ -5,6 +5,7 @@ pyarrow
 gcsfs
 optuna
 Pillow
-numpy<2.0.0
 torchmetrics
 torchmetrics[detection]
+opencv-python
+numpy<2.0.0

@@ -62,7 +62,7 @@ The 2D bounding box annotations are created in the following way:
 ### If the data is a sample of a larger subset, what was the sampling strategy?
 
 For the hyperparameter experimentation and model training, the data was sampled down.
-This process is explained [here]().
+This process of gathering and sampling data is explained [here](./data_processing_info.md).
 
 ### Over what time frame was the data collected?
 
@@ -73,7 +73,7 @@ This process is explained [here]().
 
 ## Preprocessing/cleaning/labelling
 
-Details about data processing can be found [here](). 
+Details about data processing can be found [here](./data_processing_info.md). 
  
 ## Uses
 

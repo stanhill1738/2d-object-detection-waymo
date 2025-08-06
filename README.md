@@ -9,8 +9,12 @@ The project uses the **Waymo Open Dataset (Perception)**, which includes million
 The labels focus on three object classes: **vehicles**, **pedestrians**, and **cyclists**. Data was pre-processed into PyTorch `.pt` files, and subsets were sampled for training, validation, and testing.  
 **Citation:** [Waymo Open Dataset](https://waymo.com/open/)
 
+For more information, see the [Data Sheet](docs/data_sheet.md).
+
 ## MODEL 
 The model architecture is **Faster R-CNN** from the PyTorch `torchvision` library, selected for its strong performance on object detection benchmarks and out-of-the-box support for fine-tuning. It supports multiple object classes and bounding box regression, making it ideal for 2D perception tasks.
+
+For more information about the model, see the [Model Card](docs/model_card.md).
 
 ## HYPERPARAMETER OPTIMSATION
 Hyperparameters such as learning rate, momentum, weight decay, and batch size were optimised using **Optuna**, an automated hyperparameter search framework. The objective function was based on **mAP@0.5** on a validation set.  
