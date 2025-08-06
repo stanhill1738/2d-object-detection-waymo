@@ -28,6 +28,7 @@ MODEL_PATH = "../best_model.pt" # Change to actual model path in .pt format
 LABEL_MAP_PATH = "label_map.py"
 CONFIDENCE_THRESHOLD = 0.5
 DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+CAMERA = "1"
 # ============================
 
 # ===== Step 1: Setup =====
@@ -136,7 +137,7 @@ label_map = load_label_map(LABEL_MAP_PATH)
 id_to_name = {v: k for k, v in label_map.items()}
 
 # Load data
-file_list = sorted([f for f in os.listdir(OUTPUT_DIR) if f.endswith(".pt")])
+file_list = sorted([f for f in os.listdir(OUTPUT_DIR) if f.endswith(f"_{CAMERA}.pt")])
 dataset = WaymoUnlabeledDataset(OUTPUT_DIR, file_list)
 loader = DataLoader(dataset, batch_size=1, shuffle=False)
 

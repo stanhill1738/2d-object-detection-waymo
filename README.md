@@ -47,4 +47,4 @@ Accuracy metrics like mAP and mAR are critical for evaluating perception models 
 
 ## VISUALISATION
 
-A visualisation of the model making predictions on a video can be viewed at [assets/predictions.mp4](assets/predictions.mp4).
+A visualisation of the model making predictions on a video can be viewed in the [assets](assets) folder.
