@@ -126,7 +126,8 @@ def test_model(checkpoint_path, test_prefix, label_map_path, num_test_files=1000
     test_loader = DataLoader(test_dataset, batch_size=batch_size, shuffle=False,
                              collate_fn=lambda x: tuple(zip(*x)), num_workers=4, pin_memory=True)
 
-    metric = MeanAveragePrecision()
+    print("Runing Testing:")
+    metric = MeanAveragePrecision(class_metrics=True)
     with torch.no_grad():
         for images, targets in test_loader:
             images = [img.to(device) for img in images]
@@ -138,9 +139,16 @@ def test_model(checkpoint_path, test_prefix, label_map_path, num_test_files=1000
     results = metric.compute()
     print("Final Test Set Evaluation:")
     for k, v in results.items():
-        print(f"{k}: {v:.4f}" if isinstance(v, torch.Tensor) else f"{k}: {v}")
+        if isinstance(v, torch.Tensor):
+            if v.ndim == 0:
+                print(f"{k}: {v.item():.4f}")
+            else:
+                print(f"{k}: {v}")
+        else:
+            print(f"{k}: {v}")
 
-    # 📊 Plot per-class AP
+
+    # Plot per-class AP
     if "classes" in results and "map_per_class" in results:
         class_ids = list(range(len(results["map_per_class"])))
         ap_values = results["map_per_class"].tolist()
